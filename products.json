@@ -1,6 +1,20 @@
 [
   {
     "id": 12321,
-    "name": "John"
+    "name": "Apple",
+    "price": 123123,
+    "quantity": 10
+  },
+  {
+    "id": 12321,
+    "name": "Mango",
+    "price": 123123,
+    "quantity": 2
+  },
+  {
+    "id": 12321,
+    "name": "Clothes",
+    "price": 123123,
+    "quantity": 20
   }
 ]
