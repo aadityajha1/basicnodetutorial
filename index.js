@@ -10,6 +10,8 @@ const orders = require("./orders.json");
 const mongoose = require("mongoose");
 const User = require("./models/Users");
 const indexRouter = require("./routes/index");
+const basicAuthentication = require("./middleware.js/basicAuthentication");
+const jwtBasedAuthentication = require("./middleware.js/jwtAuthentication");
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send(`Hello world`);
@@ -33,9 +35,11 @@ connectDB();
 // alUcKZXDKdfOSRdC
 app.use("/api", indexRouter);
 app.get("/users", async (req, res) => {
-  console.log(newUser);
+  // console.log(newUser);
   res.status(200).json(users);
 });
+
+app.use(jwtBasedAuthentication);
 
 app.get("/users/:id", (req, res) => {
   const user = users.filter((user) => user.id.toString() === req.params.id);
@@ -45,7 +49,7 @@ app.get("/users/:id", (req, res) => {
   return res.json(user);
 });
 
-app.post("/users/create", async (req, res) => {
+app.post("/users/create", basicAuthentication, async (req, res) => {
   // const newUser = req.body;
   const { name, phone, age, role } = req.body;
   console.log(newUser);
